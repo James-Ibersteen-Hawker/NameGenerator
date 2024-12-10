@@ -2,14 +2,14 @@ function submit() {}
 class entry {
   firstName;
   lastName;
-  input1;
-  input2;
+  fColor;
+  fNum;
   input3;
-  constructor(firstName, lastName, input1, input2, input3) {
+  constructor(firstName, lastName, fColor, fNum, input3) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.input1 = input1;
-    this.input2 = input2;
+    this.fColor = fColor;
+    this.fNum = fNum;
     this.input3 = input3;
   }
   get newFirstName() {}
