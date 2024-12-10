@@ -1,5 +1,4 @@
 function submit() {}
-
 class entry {
   firstName;
   lastName;
@@ -18,9 +17,6 @@ class entry {
   get newLastName() {}
   construct() {}
 }
-
-//name.split()
-
 const consonants = [
   "b",
   "c",
@@ -44,3 +40,4 @@ const consonants = [
   "z",
 ];
 const vowels = ["a", "e", "i", "o", "u"];
+//keep js as short as humanly possible
