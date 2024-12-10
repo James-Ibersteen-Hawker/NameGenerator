@@ -1,10 +1,4 @@
-// let entry = {
-//   first: null,
-//   last: null,
-//   entry1: null,
-//   entry2: null,
-//   entry3: null,
-// };
+function submit() {}
 
 class entry {
   firstName;
@@ -22,4 +16,31 @@ class entry {
   get newFirstName() {}
   get newMiddleName() {}
   get newLastName() {}
+  construct() {}
 }
+
+//name.split()
+
+const consonants = [
+  "b",
+  "c",
+  "d",
+  "f",
+  "g",
+  "h",
+  "j",
+  "k",
+  "l",
+  "m",
+  "n",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "v",
+  "w",
+  "x",
+  "z",
+];
+const vowels = ["a", "e", "i", "o", "u"];
