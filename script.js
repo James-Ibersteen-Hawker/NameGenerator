@@ -91,9 +91,10 @@ class entry {
       for (let i = 0; i < newName.length; i++) {
         let j = randomInt(0, name.length - 1);
         newName[i] = name[j];
-        let subBefore = name.slice(0, j);
-        let subAfter = name.slice(j + 1, name.length);
-        name = subBefore.concat(subAfter);
+        name.splice(j, 1);
+        // let subBefore = name.slice(0, j);
+        // let subAfter = name.slice(j + 1, name.length);
+        // name = subBefore.concat(subAfter);
         console.log(name, newName);
       }
       if (vowels.indexOf(newName.charAt(newName.length - 1)) == -1) {
