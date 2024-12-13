@@ -4,5 +4,20 @@
 }
 
 .invalid {
-  background: red;
+  animation-name: invalid;
+  animation-timing-function: ease-in-out;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+}
+
+@keyframes invalid {
+  0% {
+    background-color: white;
+  }
+  50% {
+    background-color: rgb(255, 163, 163);
+  }
+  100% {
+    background: white;
+  }
 }

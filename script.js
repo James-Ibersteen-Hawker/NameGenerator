@@ -76,8 +76,34 @@ class entry {
     this.input3 = input3;
   }
   get newFirstName() {
-    if (this.firstName.length >= 4) return "King";
-    else return "Master";
+    let name = this.firstName.split("");
+    let availableConsonants = [];
+    let availableVowels = [];
+    for (let i = 0; i < name.length; i++) {
+      if (consonants.indexOf(name[i]) != -1) availableConsonants.push(name[i]);
+      else if (vowels.indexOf(name[i]) != -1) availableVowels.push(name[i]);
+      else continue;
+    }
+    let newName = new Array(name.length);
+    let valid = false;
+    while (valid == false) {
+      //scramble
+      for (let i = 0; i < newName.length; i++) {
+        let j = randomInt(0, name.length - 1);
+        newName[i] = name[j];
+        let subBefore = name.slice(0, j);
+        let subAfter = name.slice(j + 1, name.length);
+        name = subBefore.concat(subAfter);
+        console.log(name, newName);
+      }
+      if (vowels.indexOf(newName.charAt(newName.length - 1)) == -1) {
+        console.log(newName.charAt(newName.length - 1));
+        valid = true;
+      } else {
+        valid = false;
+      }
+    }
+    //scramble the string whilst retaining some rules;
   }
   get newMiddleName() {
     return "val";
@@ -89,6 +115,10 @@ class entry {
     let firstName = this.newFirstName;
     let middleName = this.newMiddleName;
     let lastName = this.newLastName;
-    return `${firstName} ${middleName} ${lastName}`;
   }
+}
+
+//stackoverflow
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
