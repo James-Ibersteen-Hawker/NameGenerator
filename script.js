@@ -77,6 +77,7 @@ class entry {
   }
   get newFirstName() {
     let name = this.firstName.split("");
+    let nameHold = name;
     let availableConsonants = [];
     let availableVowels = [];
     for (let i = 0; i < name.length; i++) {
@@ -92,17 +93,49 @@ class entry {
         let j = randomInt(0, name.length - 1);
         newName[i] = name[j];
         name.splice(j, 1);
-        // let subBefore = name.slice(0, j);
-        // let subAfter = name.slice(j + 1, name.length);
-        // name = subBefore.concat(subAfter);
-        console.log(name, newName);
       }
-      if (vowels.indexOf(newName.charAt(newName.length - 1)) == -1) {
-        console.log(newName.charAt(newName.length - 1));
-        valid = true;
+      name = nameHold;
+      let vowelInc = false;
+      let vowelCount = 0;
+      let consonInc = false;
+      let consonCount = 0;
+      //if includes vowels
+      for (let i = 0; i < newName.length; i++) {
+        if (vowels.includes(newName[i])) {
+          vowelInc = true;
+          vowelCount++;
+        } else if (consonants.includes(newName[i])) {
+          consonInc = true;
+          consonCount++;
+        }
+      }
+      if (
+        vowelInc == true &&
+        vowels.indexOf(newName[newName.length - 1]) != -1
+      ) {
+        console.log("vowel at end!");
+        if (consonCount == false) {
+          console.log(newName);
+          if (newName.indexOf(vowels[4]) + 1 == newName.indexOf(vowels[0])) {
+            console.log("ua");
+          } else if (
+            newName.indexOf(vowels[4]) + 1 ==
+            newName.indexOf(vowels[1])
+          ) {
+            console.log("ue");
+          } else if (
+            newName.indexOf(vowels[4]) + 1 ==
+            newName.indexOf(vowels[2])
+          ) {
+            console.log("ue");
+          }
+          // }
+          // return newName.join("");
+        }
       } else {
-        valid = false;
+        console.log("consonant at end!");
       }
+      valid = true;
     }
     //scramble the string whilst retaining some rules;
   }
@@ -116,6 +149,7 @@ class entry {
     let firstName = this.newFirstName;
     let middleName = this.newMiddleName;
     let lastName = this.newLastName;
+    console.log(firstName);
   }
 }
 
