@@ -109,11 +109,25 @@ class entry {
           consonCount++;
         }
       }
-      if (
-        vowelInc == true &&
-        vowels.indexOf(newName[newName.length - 1]) != -1
-      ) {
-        console.log("vowel at end!");
+      let consonInsert;
+      for (let i = 0; i < newName.length; i++) {
+        if (vowels.includes(newName[i])) {
+          let currVowel = newName[i];
+          if (newName[i + 1] == currVowel && newName[i + 2] == currVowel) {
+            console.log("triple vowel");
+            let index;
+            Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
+            let rand = randomInt(0, consonants.length);
+            while (consonants[rand] == "q") {
+              rand = randomInt(0, consonants.length);
+            }
+            newName.splice(index, 0, consonants[rand]);
+            consonInsert = consonants[rand];
+          }
+        }
+      }
+      let splitName = newName.split(consonInsert);
+      if (vowelInc == true) {
         if (consonCount == false) {
           console.log(newName);
           if (newName.indexOf(vowels[4]) + 1 == newName.indexOf(vowels[0])) {
@@ -127,10 +141,27 @@ class entry {
             newName.indexOf(vowels[4]) + 1 ==
             newName.indexOf(vowels[2])
           ) {
-            console.log("ue");
+            console.log("ui");
+          } else if (
+            newName.indexOf(vowels[4]) + 1 ==
+            newName.indexOf(vowels[3])
+          ) {
+            console.log("uo");
+          } else if (
+            () => {
+              for (let i = 0; i < newName.length; i++) {
+                if (newName[i] == "u" && newName[i + 1] == "u") {
+                  return true;
+                } else {
+                  return false;
+                }
+              }
+            }
+          ) {
+            console.log("uu");
+          } else {
+            console.log("something else");
           }
-          // }
-          // return newName.join("");
         }
       } else {
         console.log("consonant at end!");
