@@ -76,7 +76,7 @@ class entry {
     this.input3 = input3;
   }
   get newFirstName() {
-    let name = this.firstName.split("");
+    let name = this.firstName.toLowerCase().split("");
     let nameHold = name;
     let availableConsonants = [];
     let availableVowels = [];
@@ -109,63 +109,64 @@ class entry {
           consonCount++;
         }
       }
-      let consonInsert;
-      for (let i = 0; i < newName.length; i++) {
+      let nLength = newName.length;
+      for (let i = 0; i < nLength; i++) {
+        console.log(i, newName.length, nLength);
         if (vowels.includes(newName[i])) {
-          let currVowel = newName[i];
-          if (newName[i + 1] == currVowel && newName[i + 2] == currVowel) {
+          if (
+            vowels.includes(newName[i + 1]) &&
+            vowels.includes(newName[i + 2])
+          ) {
             console.log("triple vowel");
             let index;
             Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
             let rand = randomInt(0, consonants.length);
+            console.log(rand);
             while (consonants[rand] == "q") {
-              rand = randomInt(0, consonants.length);
+              rand = randomInt(0, consonants.length - 1);
             }
             newName.splice(index, 0, consonants[rand]);
-            consonInsert = consonants[rand];
+            i = i + 2;
+          }
+        } else if (consonants.includes(newName[i])) {
+          if (
+            consonants.includes(newName[i + 1]) &&
+            consonants.includes(newName[i + 2])
+          ) {
+            console.log("triple consonant!");
+            let index;
+            Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
+            let rand = randomInt(0, vowels.length - 1);
+            console.log(rand);
+            newName.splice(index, 0, vowels[rand]);
+            i = i + 2;
           }
         }
       }
-      let splitName = newName.split(consonInsert);
-      if (vowelInc == true) {
-        if (consonCount == false) {
-          console.log(newName);
-          if (newName.indexOf(vowels[4]) + 1 == newName.indexOf(vowels[0])) {
-            console.log("ua");
-          } else if (
-            newName.indexOf(vowels[4]) + 1 ==
-            newName.indexOf(vowels[1])
+      nLength = newName.length;
+      for (let i = 0; i < newName.length; i++) {
+        if (consonants.includes(newName[i])) {
+          if (
+            consonants.includes(newName[i + 1]) &&
+            consonants.includes(newName[i + 2])
           ) {
-            console.log("ue");
-          } else if (
-            newName.indexOf(vowels[4]) + 1 ==
-            newName.indexOf(vowels[2])
-          ) {
-            console.log("ui");
-          } else if (
-            newName.indexOf(vowels[4]) + 1 ==
-            newName.indexOf(vowels[3])
-          ) {
-            console.log("uo");
-          } else if (
-            () => {
-              for (let i = 0; i < newName.length; i++) {
-                if (newName[i] == "u" && newName[i + 1] == "u") {
-                  return true;
-                } else {
-                  return false;
-                }
-              }
-            }
-          ) {
-            console.log("uu");
-          } else {
-            console.log("something else");
+            console.log("triple consonant!");
+            let index;
+            Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
+            let rand = randomInt(0, vowels.length - 1);
+            console.log(rand);
+            newName.splice(index, 0, vowels[rand]);
+            i = i + 2;
           }
         }
-      } else {
-        console.log("consonant at end!");
       }
+      if (
+        newName.indexOf("q") != -1 &&
+        newName.indexOf("q") != newName.length - 1
+      ) {
+        newName.splice(newName.indexOf("q") + 1, 1, "u");
+      }
+      console.log(newName);
       valid = true;
     }
     //scramble the string whilst retaining some rules;
