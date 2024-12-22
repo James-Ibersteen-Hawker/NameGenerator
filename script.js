@@ -51,15 +51,7 @@ function submit() {
     }
   }
   if (invalid != true) {
-    console.log(
-      new entry(
-        values[0],
-        values[1],
-        values[2],
-        values[3],
-        values[4]
-      ).construct()
-    );
+    new entry(values[0], values[1], values[2], values[3], values[4]).fullName;
   }
 } //39 lines
 class entry {
@@ -80,90 +72,97 @@ class entry {
     let nameHold = name;
     let availableConsonants = [];
     let availableVowels = [];
+    let valid = false;
     for (let i = 0; i < name.length; i++) {
       if (consonants.indexOf(name[i]) != -1) availableConsonants.push(name[i]);
       else if (vowels.indexOf(name[i]) != -1) availableVowels.push(name[i]);
       else continue;
     }
     let newName = new Array(name.length);
-    let valid = false;
-    while (valid == false) {
-      //scramble
-      for (let i = 0; i < newName.length; i++) {
-        let j = randomInt(0, name.length - 1);
-        newName[i] = name[j];
-        name.splice(j, 1);
-      }
-      name = nameHold;
-      let vowelInc = false;
-      let vowelCount = 0;
-      let consonInc = false;
-      let consonCount = 0;
-      //if includes vowels
-      for (let i = 0; i < newName.length; i++) {
-        if (vowels.includes(newName[i])) {
-          vowelInc = true;
-          vowelCount++;
-        } else if (consonants.includes(newName[i])) {
-          consonInc = true;
-          consonCount++;
-        }
-      }
-      for (let i = 0; i < newName.length; i++) {
-        alert(newName[i]);
-        if (vowels.includes(newName[i])) {
-          if (
-            vowels.includes(newName[i + 1]) &&
-            vowels.includes(newName[i + 2])
-          ) {
-            let index;
-            Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
-            if (i == 0) {
-              index = i + 1;
-            }
-            let rand = randomInt(0, consonants.length);
-            console.log(rand);
-            while (consonants[rand] == "q") {
-              rand = randomInt(0, consonants.length - 1);
-            }
-            newName.splice(index, 0, consonants[rand]);
-            i = index;
-          }
-        } else if (consonants.includes(newName[i])) {
-          if (
-            consonants.includes(newName[i + 1]) &&
-            consonants.includes(newName[i + 2])
-          ) {
-            let index;
-            Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
-            if (i == 0) {
-              index = i + 1;
-            }
-            let rand = randomInt(0, vowels.length - 1);
-            console.log(rand);
-            newName.splice(index, 0, vowels[rand]);
-            i = index;
-          }
-        }
-      }
-      newName = newName.join("");
-      console.log(newName);
-      alert(newName);
-      valid = true;
+    for (let i = 0; i < newName.length; i++) {
+      let j = randomInt(0, name.length - 1);
+      newName[i] = name[j];
+      name.splice(j, 1);
     }
-    //scramble the string whilst retaining some rules;
-  }
+    name = nameHold;
+    let vowelInc = false;
+    let vowelCount = 0;
+    let consonInc = false;
+    let consonCount = 0;
+    for (let i = 0; i < newName.length; i++) {
+      if (vowels.includes(newName[i])) {
+        vowelInc = true;
+        vowelCount++;
+      } else if (consonants.includes(newName[i])) {
+        consonInc = true;
+        consonCount++;
+      }
+    }
+    for (let i = 0; i < newName.length; i++) {
+      if (vowels.includes(newName[i])) {
+        if (
+          vowels.includes(newName[i + 1]) &&
+          vowels.includes(newName[i + 2])
+        ) {
+          let index;
+          Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
+          if (i == 0) {
+            index = i + 1;
+          }
+          let rand = randomInt(0, consonants.length);
+          while (consonants[rand] == "q") {
+            rand = randomInt(0, consonants.length - 1);
+          }
+          newName.splice(index, 0, consonants[rand]);
+          i = index;
+        }
+      } else if (consonants.includes(newName[i])) {
+        if (
+          consonants.includes(newName[i + 1]) &&
+          consonants.includes(newName[i + 2])
+        ) {
+          let index;
+          Math.random() > 0.5 ? (index = i + 2) : (index = i + 1);
+          if (i == 0) {
+            index = i + 1;
+          }
+          let rand = randomInt(0, vowels.length - 1);
+          newName.splice(index, 0, vowels[rand]);
+          i = index;
+        }
+      }
+    }
+    for (let i = 0; i < newName.length; i++) {
+      if (newName.includes("q")) {
+        newName.splice(newName.indexOf("q") + 1, 0, "u");
+      }
+    }
+    for (let i = 0; i < newName.length; i++) {
+      if (newName[i] == "k" && newName[i + 1] == "c") {
+        newName[i] = "c";
+        newName[i + 1] = "k";
+      }
+    }
+    return newName.join("");
+  } //fName done
   get newMiddleName() {
     return "val";
   }
   get newLastName() {
     return "val";
   }
-  construct() {
+  get fullName() {
     let firstName = this.newFirstName;
     let middleName = this.newMiddleName;
     let lastName = this.newLastName;
     console.log(firstName);
+  }
+  capitalize(arg) {
+    let string = arg.split(" ");
+    for (let i = 0; i < string.length; i++) {
+      string[i] = string[i].charAt(0).toUpperCase() + string[i].slice(1);
+    }
+    return string;
   }
 }
 
