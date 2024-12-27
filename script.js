@@ -32,22 +32,50 @@ function submit() {
     document.getElementById("fNum"),
   ];
   for (let i = 0; i < values.length; i++) {
-    if (values[i].value.search(/[a-zA-Z]/) == -1) {
-      values[i].classList.add("invalid");
-      invalid = true;
-      setTimeout(
-        () => {
-          values[i].classList.remove("invalid");
-          values[i] = undefined;
-          return;
-        },
-        500,
-        values[i]
-      );
+    if (values[i] != document.getElementById("fNum")) {
+      if (
+        values[i].value.search(/[a-zA-Z]/) == -1 ||
+        values[i].value.search(/[1-9]/) != -1
+      ) {
+        values[i].classList.add("invalid");
+        values[i].value = "";
+        invalid = true;
+        setTimeout(
+          () => {
+            values[i].classList.remove("invalid");
+            values[i] = undefined;
+            return;
+          },
+          500,
+          values[i]
+        );
+      } else {
+        let temp = values[i].value.trim();
+        i != 3 ? (values[i].value = "") : values[i];
+        values[i] = temp;
+      }
     } else {
-      let temp = values[i].value.trim();
-      i != 3 ? (values[i].value = "") : values[i];
-      values[i] = temp;
+      if (
+        values[i].value.search(/[1-9]/) == -1 ||
+        (values[i].value > 10 && values[i].value > -1)
+      ) {
+        values[i].classList.add("invalid");
+        invalid = true;
+        setTimeout(
+          () => {
+            values[i].classList.remove("invalid");
+            values[i].value = "";
+            values[i] = undefined;
+            return;
+          },
+          500,
+          values[i]
+        );
+      } else {
+        let temp = values[i].value.trim();
+        i != 3 ? (values[i].value = "") : values[i];
+        values[i] = temp;
+      }
     }
   }
   if (invalid != true) {
@@ -58,14 +86,14 @@ class entry {
   firstName;
   lastName;
   fColor;
+  power;
   fNum;
-  input3;
-  constructor(firstName, lastName, fColor, fNum, input3) {
+  constructor(firstName, lastName, fColor, power, fNum) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.fColor = fColor;
+    this.power = power;
     this.fNum = fNum;
-    this.input3 = input3;
   }
   get newFirstName() {
     let name = this.firstName.toLowerCase().split("");
@@ -143,19 +171,211 @@ class entry {
         newName[i + 1] = "k";
       }
     }
+    if (
+      newName.includes("h") &&
+      newName.indexOf("h") == 0 &&
+      newName.includes("c") &&
+      newName.indexOf("c") == 1
+    ) {
+      newName[0] = "c";
+      newName[1] = "h";
+    }
     return newName.join("");
   } //fName done
-  get newMiddleName() {
-    return "val";
+  get ending() {
+    //deal with the color
+    let words = this.fColor.toLowerCase().split(" ");
+    let letter;
+    let construct = [];
+    let wordPart;
+    if (words.length > 1) {
+      words = words[1];
+      words = words.split("");
+      letter = words[0];
+    } else {
+      words = words[0].split("");
+      letter = words[0];
+    }
+    switch (letter) {
+      case "a":
+        wordPart = "Ahir";
+        break;
+      case "b":
+        wordPart = "Bashkhaad";
+        break;
+      case "c":
+        wordPart = "Chiin";
+        break;
+      case "d":
+        wordPart = "Dorvstvok";
+        break;
+      case "e":
+        wordPart = "Eaelin";
+        break;
+      case "f":
+        wordPart = "Furna";
+        break;
+      case "g":
+        wordPart = "Ga'gstrigo";
+        break;
+      case "h":
+        wordPart = "Hoep";
+        break;
+      case "i":
+        wordPart = "Iondys";
+        break;
+      case "j":
+        wordPart = "Jalo";
+        break;
+      case "k":
+        wordPart = "Kotta";
+        break;
+      case "l":
+        wordPart = "Laprakolos";
+        break;
+      case "m":
+        wordPart = "Mologra";
+        break;
+      case "n":
+        wordPart = "Nphuitre";
+        break;
+      case "o":
+        wordPart = "Ongri";
+        break;
+      case "p":
+        wordPart = "Pir";
+        break;
+      case "q":
+        wordPart = "Quoret";
+        break;
+      case "r":
+        wordPart = "Rokur";
+        break;
+      case "s":
+        wordPart = "Sindap";
+        break;
+      case "t":
+        wordPart = "Tolot";
+        break;
+      case "u":
+        wordPart = "Uundras";
+        break;
+      case "v":
+        wordPart = "Ventro";
+        break;
+      case "w":
+        wordPart = "Wkull";
+        break;
+      case "x":
+        wordPart = "Xata";
+        break;
+      case "y":
+        wordPart = "Ykaftrys";
+        break;
+      case "z":
+        wordPart = "Zul";
+        break;
+      default:
+        wordPart = "Khora";
+        break;
+    }
+    construct.push(wordPart);
+    //deal with the number
+    let myNumber = Number(this.fNum);
+    switch (myNumber) {
+      case 1:
+        construct.push("one");
+        break;
+      case 2:
+        construct.push("two");
+        break;
+      case 3:
+        construct.push("three");
+        break;
+      case 4:
+        construct.push("four");
+        break;
+      case 5:
+        construct.push("five");
+        break;
+      case 6:
+        construct.push("six");
+        break;
+      case 7:
+        construct.push("seven");
+        break;
+      case 8:
+        construct.push("eight");
+        break;
+      case 9:
+        construct.push("nine");
+        break;
+      case 10:
+        construct.push("ten");
+        break;
+      default:
+        alert(`${this.fNum} is an invalid number input`);
+        throw new Error(`${this.fNum} is an invalid number input`);
+    }
+    let rand = Math.floor(Math.random() * 10);
+    switch (rand) {
+      case 0:
+        construct.push("river");
+        break;
+      case 1:
+        construct.push("mountain");
+        break;
+      case 2:
+        construct.push("grove");
+        break;
+      case 3:
+        construct.push("forest");
+        break;
+      case 4:
+        construct.push("pyramid");
+        break;
+      case 5:
+        construct.push("volcano");
+        break;
+      case 6:
+        construct.push("desert");
+        break;
+      case 7:
+        construct.push("field");
+        break;
+      case 8:
+        construct.push("god");
+        break;
+      case 9:
+        construct.push("order");
+        break;
+      default:
+        alert(`rand is invalid, rand = ${rand}`);
+        throw new Error(`${rand} is an invalid random number`);
+    }
+    //assemble
+    let rand2 = Math.random();
+    let part;
+    if (rand2 >= 0.7) {
+      part = `of ${construct[0]}`;
+    } else {
+      part = `of the ${construct[1]} ${this.pluralize(
+        construct[2],
+        myNumber
+      )} of ${construct[0]}`;
+    }
+    return part;
   }
   get newLastName() {
+    //use power
+    //use lastname input
     return "val";
   }
   get fullName() {
     let firstName = this.newFirstName;
-    let middleName = this.newMiddleName;
+    let end = this.ending;
     let lastName = this.newLastName;
-    console.log(firstName);
+    console.log(this.capitalize(firstName), end);
   }
   capitalize(arg) {
     let string = arg.split(" ");
@@ -163,6 +383,11 @@ class entry {
       string[i] = string[i].charAt(0).toUpperCase() + string[i].slice(1);
     }
     return string;
+  }
+  pluralize(arg, num) {
+    if (num > 1) {
+      return arg + "s";
+    }
   }
 }
 
