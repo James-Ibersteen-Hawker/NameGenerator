@@ -171,6 +171,12 @@ class entry {
         newName[i + 1] = "k";
       }
     }
+    for (let i = 0; i < newName.length; i++) {
+      if (newName[i] == "h" && newName[i + 1] == "c") {
+        newName[i] = "c";
+        newName[i + 1] = "h";
+      }
+    }
     if (
       newName.includes("h") &&
       newName.indexOf("h") == 0 &&
@@ -181,7 +187,7 @@ class entry {
       newName[1] = "h";
     }
     return newName.join("");
-  } //fName done
+  } //uses only fName
   get ending() {
     //deal with the color
     let words = this.fColor.toLowerCase().split(" ");
@@ -365,18 +371,71 @@ class entry {
       )} of ${construct[0]}`;
     }
     return part;
-  }
+  } //uses color and number
   get newLastName() {
-    //use power
-    //use lastname input
-    return "val";
-  }
+    let nameConstruct = [];
+    for (let i = 0; i < this.power.length; i++) {
+      if (this.power[i] == "c") {
+        let insert;
+        if (i == 0) {
+          insert = consonants[randomInt(0, consonants.length - 1)];
+          nameConstruct.push(insert);
+        } else {
+          if (nameConstruct[i - 1] == "c") {
+            while (
+              insert == "k" ||
+              insert == "q" ||
+              insert == "p" ||
+              insert == "t"
+            ) {
+              insert = consonants[randomInt(0, consonants.length - 1)];
+            }
+            nameConstruct.push(insert);
+          } else if (nameConstruct[i - 1] == "t") {
+            while (
+              insert == "k" ||
+              insert == "q" ||
+              insert == "p" ||
+              insert == "d"
+            ) {
+              insert = consonants[randomInt(0, consonants.length - 1)];
+            }
+            nameConstruct.push(insert);
+          } else if (nameConstruct[i - 1] == "q") {
+            if (i < this.power.length && this.power[i + 1] == "c") {
+              insert = vowels[randomInt(0, vowels.length - 1)];
+              nameConstruct.push(insert);
+            } else {
+              insert = vowels[randomInt(0, vowels.length - 1)];
+              nameConstruct.push(insert);
+              let insert2;
+              while (insert2 == "q") {
+                insert2 = consonants[randomInt(0, consonants.length - 1)];
+              }
+              nameConstruct.push(insert2);
+            }
+          } else {
+            insert = consonants[randomInt(0, consonants.length - 1)];
+            nameConstruct.push(insert);
+          }
+        }
+      } else {
+        let insert = vowels[randomInt(0, vowels.length - 1)];
+        nameConstruct.push(insert);
+      }
+    }
+    return nameConstruct.join("");
+  } //uses lName and power
   get fullName() {
     let firstName = this.newFirstName;
+    let lastNames = [];
+    for (let i = 0; i < Math.ceil(this.lastName.length / 3); i++) {
+      lastNames.push(this.capitalize(this.newLastName));
+    }
     let end = this.ending;
-    let lastName = this.newLastName;
-    console.log(this.capitalize(firstName), end);
-  }
+    let output = `${this.capitalize(firstName)} ${lastNames.join(" ")} ${end}`;
+    console.log(output);
+  } //build
   capitalize(arg) {
     let string = arg.split(" ");
     for (let i = 0; i < string.length; i++) {
