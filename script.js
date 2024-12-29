@@ -1,4 +1,6 @@
 "use strict";
+window.addEventListener("beforeunload", save);
+window.onload = load();
 const consonants = [
   "b",
   "c",
@@ -449,7 +451,20 @@ class entry {
     }
   }
 }
-
+function save() {
+  let inputs = document.getElementsByTagName("INPUT");
+  for (let i = 0; i < inputs.length; i++) {
+    sessionStorage.setItem(`${i}th`, inputs[i].value);
+  }
+}
+function load() {
+  let inputs = document.getElementsByTagName("INPUT");
+  for (let i = 0; i < inputs.length; i++) {
+    if (sessionStorage.getItem(`${i}th`)) {
+      inputs[i].value = sessionStorage.getItem(`${i}th`);
+    }
+  }
+}
 //stackoverflow
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
