@@ -81,7 +81,14 @@ function submit() {
     }
   }
   if (invalid != true) {
-    new entry(values[0], values[1], values[2], values[3], values[4]).fullName;
+    let outputElem = document.getElementById("output");
+    outputElem.textContent = new entry(
+      values[0],
+      values[1],
+      values[2],
+      values[3],
+      values[4]
+    ).fullName;
   }
 } //39 lines
 class entry {
@@ -436,7 +443,7 @@ class entry {
     }
     let end = this.ending;
     let output = `${this.capitalize(firstName)} ${lastNames.join(" ")} ${end}`;
-    console.log(output);
+    return output;
   } //build
   capitalize(arg) {
     let string = arg.split(" ");
