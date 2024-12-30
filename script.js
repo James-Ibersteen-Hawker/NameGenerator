@@ -21,6 +21,7 @@ const consonants = [
   "v",
   "w",
   "x",
+  "y",
   "z",
 ];
 const vowels = ["a", "e", "i", "o", "u"];
@@ -105,17 +106,20 @@ class entry {
     this.fNum = fNum;
   }
   get newFirstName() {
+    console.log("fName");
     let name = this.firstName.toLowerCase().split("");
     let nameHold = name;
     let availableConsonants = [];
     let availableVowels = [];
     let valid = false;
+    console.log("here1");
     for (let i = 0; i < name.length; i++) {
       if (consonants.indexOf(name[i]) != -1) availableConsonants.push(name[i]);
       else if (vowels.indexOf(name[i]) != -1) availableVowels.push(name[i]);
-      else continue;
+      else console.log(name[i]);
     }
     let newName = new Array(name.length);
+    console.log();
     for (let i = 0; i < newName.length; i++) {
       let j = randomInt(0, name.length - 1);
       newName[i] = name[j];
@@ -126,6 +130,7 @@ class entry {
     let vowelCount = 0;
     let consonInc = false;
     let consonCount = 0;
+    console.log("here2");
     for (let i = 0; i < newName.length; i++) {
       if (vowels.includes(newName[i])) {
         vowelInc = true;
@@ -135,6 +140,7 @@ class entry {
         consonCount++;
       }
     }
+    console.log("here3");
     for (let i = 0; i < newName.length; i++) {
       if (vowels.includes(newName[i])) {
         if (
@@ -169,23 +175,20 @@ class entry {
         }
       }
     }
+    console.log("here4");
     for (let i = 0; i < newName.length; i++) {
-      if (newName.includes("q")) {
+      if (newName[i] == "q") {
         newName.splice(newName.indexOf("q") + 1, 0, "u");
       }
     }
+    console.log("here5");
     for (let i = 0; i < newName.length; i++) {
       if (newName[i] == "k" && newName[i + 1] == "c") {
         newName[i] = "c";
         newName[i + 1] = "k";
       }
     }
-    for (let i = 0; i < newName.length; i++) {
-      if (newName[i] == "h" && newName[i + 1] == "c") {
-        newName[i] = "c";
-        newName[i + 1] = "h";
-      }
-    }
+    console.log("here6");
     if (
       newName.includes("h") &&
       newName.indexOf("h") == 0 &&
@@ -195,9 +198,11 @@ class entry {
       newName[0] = "c";
       newName[1] = "h";
     }
+    console.log("here7");
     return newName.join("");
   } //uses only fName
   get ending() {
+    console.log("ending");
     //deal with the color
     let words = this.fColor.toLowerCase().split(" ");
     let letter;
@@ -382,6 +387,7 @@ class entry {
     return part;
   } //uses color and number
   get newLastName() {
+    console.log("lName");
     let nameConstruct = [];
     for (let i = 0; i < this.power.length; i++) {
       if (this.power[i] == "c") {
@@ -436,6 +442,7 @@ class entry {
     return nameConstruct.join("");
   } //uses lName and power
   get fullName() {
+    console.log("compile");
     let firstName = this.newFirstName;
     let lastNames = [];
     for (let i = 0; i < Math.ceil(this.lastName.length / 3); i++) {
