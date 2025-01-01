@@ -1,6 +1,18 @@
 * {
+  color: wheat;
+  font-weight: 900;
   margin: 0;
   padding: 0;
+}
+
+@font-face {
+  font-family: Deutsche;
+  src: url(DeutscheZierschrift.ttf);
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(Montserrat-Regular.ttf);
 }
 
 .invalid {
@@ -21,3 +33,159 @@
     background: white;
   }
 }
+
+body {
+  background: rgb(122, 0, 0);
+  border: 10px solid #bf6703;
+  box-shadow: 0px 0px 10px rgb(27, 0, 0) inset, 0px 0px 10px rgb(27, 0, 0) inset;
+  min-height: 100vh;
+}
+
+body::after {
+  content: "";
+  inset: 0;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: #9e5400;
+  z-index: -1;
+  mask-image: url(weaponsBG.png);
+  opacity: 1;
+}
+
+form {
+  width: 80% !important;
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+label {
+  color: wheat;
+  font-family: "Montserrat", sans-serif;
+}
+
+input,
+option,
+select {
+  color: black;
+  font-weight: initial;
+  background: rgba(255, 100, 100, 0.7) !important;
+}
+
+input,
+select {
+  border: 5px solid #bf6703 !important;
+  outline: none;
+  box-shadow: 0px 0px 5px rgb(27, 0, 0), 0px 0px 3px rgb(27, 0, 0) inset !important;
+  transition: 0.1s;
+}
+
+input::placeholder,
+option,
+select {
+  color: rgb(27, 0, 0) !important;
+  font-weight: 700 !important;
+}
+
+input:focus,
+select:focus {
+  outline: none !important;
+  box-shadow: 0px 0px 5px 2px rgb(27, 0, 0), 0px 0px 2px rgb(27, 0, 0) inset !important;
+  transition: 0.1s;
+}
+
+h1 {
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  font-size: 30px;
+  padding: 10px;
+  text-shadow: 0px 0px 20px rgb(27, 0, 0), 0px 0px 20px rgb(27, 0, 0),
+    0px 0px 20px rgb(27, 0, 0), 0px 0px 20px rgb(27, 0, 0);
+  background: green;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 0;
+  border-radius: 20px;
+  border: 10px solid #bf6703;
+  box-shadow: 0px 0px 5px rgb(27, 0, 0) inset, 0px 0px 10px rgb(27, 0, 0) inset,
+    0px 0px 10px rgb(27, 0, 0), 0px 0px 10px rgb(27, 0, 0);
+  background: rgba(170, 41, 41, 0.8);
+  z-index: 2;
+}
+
+h1 span {
+  font-family: "Deutsche", serif;
+  font-size: 70px;
+  font-weight: inherit;
+}
+
+p {
+  position: relative;
+  text-transform: uppercase;
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  background: rgba(170, 41, 41, 0.8);
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0;
+  border-right: 10px solid #bf6703;
+  border-left: 10px solid #bf6703;
+  box-shadow: 0px 0px 5px rgb(27, 0, 0) inset, 0px 0px 10px rgb(27, 0, 0) inset,
+    0px 0px 10px rgb(27, 0, 0), 0px 0px 10px rgb(27, 0, 0);
+  z-index: 1;
+}
+
+.subBubble {
+  position: relative;
+  padding: 10px;
+  font-family: "Montserrat", sans-serif;
+  background: rgba(170, 41, 41, 0.8);
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0px;
+  border-radius: 20px;
+  border: 10px solid #bf6703;
+  box-shadow: 0px 0px 5px rgb(27, 0, 0) inset, 0px 0px 10px rgb(27, 0, 0) inset,
+    0px 0px 10px rgb(27, 0, 0), 0px 0px 10px rgb(27, 0, 0);
+  z-index: 1;
+}
+
+table {
+  height: 60px;
+  filter: drop-shadow(0px 0px 5px rgb(27, 0, 0))
+    drop-shadow(0px 0px 2px rgb(27, 0, 0));
+  width: 100%;
+  max-width: 800px;
+  margin-top: -20px;
+  margin-bottom: -20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  height: 80px;
+  width: 50%;
+  background-color: #ce740e;
+  opacity: 1;
+}
+
+td:nth-child(1) {
+  mask-image: url(sword_left.png);
+  mask-size: 100% 100%;
+  mask-position: right;
+  mask-repeat: no-repeat;
+}
+
+td:nth-child(2) {
+  mask-image: url(sword_right.png);
+  mask-size: 100% 100%;
+  mask-position: left;
+  mask-repeat: no-repeat;
+}
+/* linear-gradient(to right, #bf6703 0%, #bf6703 100%) */

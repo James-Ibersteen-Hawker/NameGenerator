@@ -26,71 +26,87 @@
     <main class="container-fluid">
       <div class="text-center mb-4">
         <!--instructions-->
-        <h1>What's Your Ancient Warrior Name?</h1>
-        <p>Please fill out the forms below to create your superhero name</p>
-        <!--form-->
-        <form action="" id="nameForm" class="mb-4">
-          <div class="mb-3">
-            <label for="fName" class="form-label">First Name</label>
-            <input
-              type="text"
-              id="fName"
-              name="fName"
-              class="form-control"
-              placeholder="Enter first name"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="lName" class="form-label">Last Name</label>
-            <input
-              type="text"
-              id="lName"
-              name="lName"
-              class="form-control"
-              placeholder="Enter last name"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="fColor" class="form-label">Favorite Color</label>
-            <input
-              type="text"
-              id="fColor"
-              name="fColor"
-              class="form-control"
-              placeholder="Favorite Color"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="superPowerDrop" class="form-label"
-              >Desired Superpower</label
-            >
-            <select id="superPowerDrop" class="form-select">
-              <option value="cvcvcvcvc">Laser Eyes</option>
-              <option value="cvcv">Fire Breath</option>
-              <option value="ccvccv">Flight</option>
-              <option value="ccvcvcv">Gravity Manipulation</option>
-              <option value="cvcvcvcc">Teleportation</option>
-            </select>
-          </div>
-          <div class="mb-3">
-            <label for="fNum" class="form-label"
-              >Favorite Number Between 0 and 10</label
-            >
-            <input
-              type="text"
-              id="fNum"
-              name="fNum"
-              class="form-control"
-              placeholder="Favorite Number Less than Ten (in NUMBERS)"
-            />
-          </div>
-          <div class="mb-3">
-            <span class="btn btn-primary w-100" onclick="submit()">
-              Generate Name
-            </span>
-          </div>
-        </form>
-        <div id="output"></div>
+        <h1>What's Your <br /><span>Ancient Warrior</span> <br />Name?</h1>
+        <p>
+          Please fill out the forms below to create your ancient warrior name
+        </p>
+        <div class="subBubble">
+          <table>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+          <!--form-->
+          <form action="" id="nameForm" class="mb-4">
+            <div class="mb-3">
+              <label for="fName" class="form-label">First Name</label>
+              <input
+                type="text"
+                id="fName"
+                name="fName"
+                class="form-control"
+                placeholder="Enter first name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="lName" class="form-label">Last Name</label>
+              <input
+                type="text"
+                id="lName"
+                name="lName"
+                class="form-control"
+                placeholder="Enter last name"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="fColor" class="form-label">Favorite Color</label>
+              <input
+                type="text"
+                id="fColor"
+                name="fColor"
+                class="form-control"
+                placeholder="Favorite Color"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="superPowerDrop" class="form-label"
+                >Desired Superpower</label
+              >
+              <select id="superPowerDrop" class="form-select">
+                <option value="cvcvcvcvc">Laser Eyes</option>
+                <option value="cvcv">Fire Breath</option>
+                <option value="ccvccv">Flight</option>
+                <option value="ccvcvcv">Gravity Manipulation</option>
+                <option value="cvcvcvcc">Teleportation</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="fNum" class="form-label"
+                >Favorite Number Between 0 and 10</label
+              >
+              <input
+                type="text"
+                id="fNum"
+                name="fNum"
+                class="form-control"
+                placeholder="Favorite Number Less than Ten (in NUMBERS)"
+              />
+            </div>
+            <div class="mb-3">
+              <span
+                class="btn btn-primary w-100 buttonSubmit"
+                onclick="submit()"
+              >
+                Generate Name
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="outPutBox d-none">
+          <div id="output"></div>
+          <div class="btn btn-primary w-100" onclick="copy()"></div>
+        </div>
       </div>
     </main>
 

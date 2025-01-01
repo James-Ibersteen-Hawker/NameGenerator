@@ -25,6 +25,7 @@ const consonants = [
   "z",
 ];
 const vowels = ["a", "e", "i", "o", "u"];
+let nameOutput;
 function submit() {
   let invalid = false;
   let values = [
@@ -430,7 +431,9 @@ class entry {
               nameConstruct.push(insert2);
             }
           } else {
-            insert = consonants[randomInt(0, consonants.length - 1)];
+            while (insert == nameConstruct[i - 1]) {
+              insert = consonants[randomInt(0, consonants.length - 1)];
+            }
             nameConstruct.push(insert);
           }
         }
@@ -450,6 +453,7 @@ class entry {
     }
     let end = this.ending;
     let output = `${this.capitalize(firstName)} ${lastNames.join(" ")} ${end}`;
+    nameOutput = output;
     return output;
   } //build
   capitalize(arg) {
@@ -482,4 +486,7 @@ function load() {
 //stackoverflow
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
+}
+function copy() {
+  navigator.clipboard.writeText(nameOutput);
 }
