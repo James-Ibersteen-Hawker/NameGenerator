@@ -90,8 +90,8 @@ select {
 input::placeholder,
 option,
 select {
-  color: rgb(27, 0, 0) !important;
-  font-weight: 700 !important;
+  color: rgb(48, 9, 9) !important;
+  font-weight: 500 !important;
 }
 
 input:focus,
@@ -294,6 +294,7 @@ h2 {
   height: 100%;
   top: 0;
   left: 0;
+  cursor: pointer;
   background: black;
 }
 

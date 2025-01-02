@@ -442,7 +442,7 @@ class entry {
   get fullName() {
     let firstName = this.newFirstName;
     let lastNames = [];
-    for (let i = 0; i < Math.ceil(this.lastName.length / 3); i++) {
+    for (let i = 0; i < Math.ceil(this.lastName.length / 5); i++) {
       lastNames.push(this.capitalize(this.newLastName));
     }
     let end = this.ending;
