@@ -38,15 +38,19 @@ function submit() {
   for (let i = 0; i < values.length; i++) {
     if (values[i] != document.getElementById("fNum")) {
       if (
-        values[i].value.search(/[a-zA-Z]/) == -1 ||
-        values[i].value.search(/[1-9]/) != -1
+        values[i].value.trim().search(/[a-zA-Z]/) == -1 ||
+        values[i].value.trim().search(/[1-9]/) != -1 ||
+        values[i].value.trim().includes(" ") ||
+        values[i].value.trim().search(/[$&+,:;=?@#|'<>.^*()%!-]/) != -1
       ) {
+        values[i].classList.remove("baseColor");
         values[i].classList.add("invalid");
         values[i].value = "";
         invalid = true;
         setTimeout(
           () => {
             values[i].classList.remove("invalid");
+            values[i].classList.add("baseColor");
             values[i] = undefined;
             return;
           },
@@ -60,14 +64,20 @@ function submit() {
       }
     } else {
       if (
-        values[i].value.search(/[1-9]/) == -1 ||
-        (values[i].value > 10 && values[i].value > -1)
+        values[i].value.trim().search(/[1-9]/) == -1 ||
+        values[i].value.trim() > 10 ||
+        values[i].value.trim() < -1 ||
+        values[i].value.trim().search(/[a-zA-Z]/) != -1 ||
+        values[i].value.trim().includes(" ") ||
+        values[i].value.trim().search(/[$&+,:;=?@#|'<>.^*()%!-]/) != -1
       ) {
+        values[i].classList.remove("baseColor");
         values[i].classList.add("invalid");
         invalid = true;
         setTimeout(
           () => {
             values[i].classList.remove("invalid");
+            values[i].classList.add("baseColor");
             values[i].value = "";
             values[i] = undefined;
             return;
@@ -91,6 +101,9 @@ function submit() {
       values[3],
       values[4]
     ).fullName;
+    let openNameAgain = document.getElementById("openNameAgain");
+    openNameAgain.classList.remove("d-none");
+    nameAlert("on");
   }
 } //39 lines
 class entry {
@@ -107,20 +120,17 @@ class entry {
     this.fNum = fNum;
   }
   get newFirstName() {
-    console.log("fName");
     let name = this.firstName.toLowerCase().split("");
     let nameHold = name;
     let availableConsonants = [];
     let availableVowels = [];
     let valid = false;
-    console.log("here1");
     for (let i = 0; i < name.length; i++) {
       if (consonants.indexOf(name[i]) != -1) availableConsonants.push(name[i]);
       else if (vowels.indexOf(name[i]) != -1) availableVowels.push(name[i]);
       else console.log(name[i]);
     }
     let newName = new Array(name.length);
-    console.log();
     for (let i = 0; i < newName.length; i++) {
       let j = randomInt(0, name.length - 1);
       newName[i] = name[j];
@@ -131,7 +141,6 @@ class entry {
     let vowelCount = 0;
     let consonInc = false;
     let consonCount = 0;
-    console.log("here2");
     for (let i = 0; i < newName.length; i++) {
       if (vowels.includes(newName[i])) {
         vowelInc = true;
@@ -141,7 +150,6 @@ class entry {
         consonCount++;
       }
     }
-    console.log("here3");
     for (let i = 0; i < newName.length; i++) {
       if (vowels.includes(newName[i])) {
         if (
@@ -176,20 +184,17 @@ class entry {
         }
       }
     }
-    console.log("here4");
     for (let i = 0; i < newName.length; i++) {
       if (newName[i] == "q") {
         newName.splice(newName.indexOf("q") + 1, 0, "u");
       }
     }
-    console.log("here5");
     for (let i = 0; i < newName.length; i++) {
       if (newName[i] == "k" && newName[i + 1] == "c") {
         newName[i] = "c";
         newName[i + 1] = "k";
       }
     }
-    console.log("here6");
     if (
       newName.includes("h") &&
       newName.indexOf("h") == 0 &&
@@ -199,11 +204,9 @@ class entry {
       newName[0] = "c";
       newName[1] = "h";
     }
-    console.log("here7");
     return newName.join("");
   } //uses only fName
   get ending() {
-    console.log("ending");
     //deal with the color
     let words = this.fColor.toLowerCase().split(" ");
     let letter;
@@ -388,7 +391,6 @@ class entry {
     return part;
   } //uses color and number
   get newLastName() {
-    console.log("lName");
     let nameConstruct = [];
     for (let i = 0; i < this.power.length; i++) {
       if (this.power[i] == "c") {
@@ -417,35 +419,27 @@ class entry {
               insert = consonants[randomInt(0, consonants.length - 1)];
             }
             nameConstruct.push(insert);
-          } else if (nameConstruct[i - 1] == "q") {
-            if (i < this.power.length && this.power[i + 1] == "c") {
-              insert = vowels[randomInt(0, vowels.length - 1)];
-              nameConstruct.push(insert);
-            } else {
-              insert = vowels[randomInt(0, vowels.length - 1)];
-              nameConstruct.push(insert);
-              let insert2;
-              while (insert2 == "q") {
-                insert2 = consonants[randomInt(0, consonants.length - 1)];
-              }
-              nameConstruct.push(insert2);
-            }
           } else {
-            while (insert == nameConstruct[i - 1]) {
+            if (vowels.includes(nameConstruct[i - 1])) {
               insert = consonants[randomInt(0, consonants.length - 1)];
+            } else {
+              while (insert == nameConstruct[i - 1]) {
+                insert = consonants[randomInt(0, consonants.length - 1)];
+              }
             }
             nameConstruct.push(insert);
           }
         }
-      } else {
+      } else if (this.power[i] == "v") {
         let insert = vowels[randomInt(0, vowels.length - 1)];
         nameConstruct.push(insert);
+      } else {
+        alert("invalid this.power[i]");
       }
     }
     return nameConstruct.join("");
   } //uses lName and power
   get fullName() {
-    console.log("compile");
     let firstName = this.newFirstName;
     let lastNames = [];
     for (let i = 0; i < Math.ceil(this.lastName.length / 3); i++) {
@@ -483,10 +477,27 @@ function load() {
     }
   }
 }
+function copy() {
+  navigator.clipboard.writeText(nameOutput);
+}
+function nameAlert(onOff) {
+  let nameAlert = document.getElementById("alert");
+  let fader = document.getElementById("fader");
+  if (onOff == "on") {
+    nameAlert.classList.remove("d-none");
+    nameAlert.classList.add("zoomIn");
+    fader.classList.remove("d-none");
+    fader.classList.add("faderIn");
+  } else if (onOff == "off") {
+    nameAlert.classList.add("d-none");
+    nameAlert.classList.remove("zoomIn");
+    fader.classList.add("d-none");
+    fader.classList.remove("faderIn");
+  } else {
+    alert("Invalid input to nameAlert()!");
+  }
+}
 //stackoverflow
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
-}
-function copy() {
-  navigator.clipboard.writeText(nameOutput);
 }

@@ -46,7 +46,7 @@
                 type="text"
                 id="fName"
                 name="fName"
-                class="form-control"
+                class="form-control baseColor"
                 placeholder="Enter first name"
               />
             </div>
@@ -56,7 +56,7 @@
                 type="text"
                 id="lName"
                 name="lName"
-                class="form-control"
+                class="form-control baseColor"
                 placeholder="Enter last name"
               />
             </div>
@@ -66,7 +66,7 @@
                 type="text"
                 id="fColor"
                 name="fColor"
-                class="form-control"
+                class="form-control baseColor"
                 placeholder="Favorite Color"
               />
             </div>
@@ -74,7 +74,7 @@
               <label for="superPowerDrop" class="form-label"
                 >Desired Superpower</label
               >
-              <select id="superPowerDrop" class="form-select">
+              <select id="superPowerDrop" class="form-select baseColor">
                 <option value="cvcvcvcvc">Laser Eyes</option>
                 <option value="cvcv">Fire Breath</option>
                 <option value="ccvccv">Flight</option>
@@ -84,36 +84,62 @@
             </div>
             <div class="mb-3">
               <label for="fNum" class="form-label"
-                >Favorite Number Between 0 and 10</label
+                >Integer between 0 and 10</label
               >
               <input
                 type="text"
                 id="fNum"
                 name="fNum"
-                class="form-control"
-                placeholder="Favorite Number Less than Ten (in NUMBERS)"
+                class="form-control baseColor"
+                placeholder="Integer between 0 and 10"
               />
             </div>
             <div class="mb-3">
-              <span
-                class="btn btn-primary w-100 buttonSubmit"
-                onclick="submit()"
-              >
+              <span class="button w-100 buttonSubmit" onclick="submit()">
                 Generate Name
+              </span>
+            </div>
+            <div class="mb-3 d-none" id="openNameAgain">
+              <span class="button w-100 buttonSubmit" onclick="nameAlert('on')">
+                Show Name
               </span>
             </div>
           </form>
         </div>
-        <div class="outPutBox">
-          <div id="output"></div>
-          <div class="btn btn-primary w-100" onclick="copy()"></div>
+        <div class="outPutBox d-none" id="alert">
+          <div class="closeIcon" onclick="nameAlert('off')">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-x-lg"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+              />
+            </svg>
+          </div>
+          <div class="outPutText">
+            <h2 id="output">Generated Name Output</h2>
+          </div>
+          <table>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+          <div class="copyButton">
+            <div class="button w-80" onclick="copy()">Copy to Clipboard</div>
+          </div>
         </div>
       </div>
     </main>
 
     <!----------------------------------------------------------------->
     <footer></footer>
-
+    <div id="fader" class="d-none"></div>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
       integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
