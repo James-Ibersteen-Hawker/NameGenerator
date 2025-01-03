@@ -36,7 +36,32 @@ function submit() {
     document.getElementById("fNum"),
   ];
   for (let i = 0; i < values.length; i++) {
-    if (values[i] != document.getElementById("fNum")) {
+    if (values[i] == document.getElementById("fColor")) {
+      if (
+        values[i].value.search(/[a-zA-Z]/) == -1 ||
+        values[i].value.search(/[1-9]/) != -1 ||
+        values[i].value.search(/[$&+,:;=?@#|'<>.^*()%!-]/) != -1
+      ) {
+        values[i].classList.remove("baseColor");
+        values[i].classList.add("invalid");
+        values[i].value = "";
+        invalid = true;
+        setTimeout(
+          () => {
+            values[i].classList.remove("invalid");
+            values[i].classList.add("baseColor");
+            values[i] = undefined;
+            return;
+          },
+          500,
+          values[i]
+        );
+      } else {
+        let temp = values[i].value.trim();
+        i != 3 ? (values[i].value = "") : values[i];
+        values[i] = temp;
+      }
+    } else if (values[i] != document.getElementById("fNum")) {
       if (
         values[i].value.trim().search(/[a-zA-Z]/) == -1 ||
         values[i].value.trim().search(/[1-9]/) != -1 ||

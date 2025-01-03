@@ -87,9 +87,7 @@ select {
   transition: 0.1s;
 }
 
-input::placeholder,
-option,
-select {
+input::placeholder {
   color: rgb(48, 9, 9) !important;
   font-weight: 500 !important;
 }
